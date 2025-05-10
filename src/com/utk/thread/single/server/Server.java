@@ -1,4 +1,4 @@
-package com.utk.server;
+package com.utk.thread.single.server;
 
 import java.io.BufferedReader;
 import java.io.IOException;
