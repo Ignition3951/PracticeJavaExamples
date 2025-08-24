@@ -1,9 +1,9 @@
 package com.utk.designpattern.simulator;
 
-import com.utk.designpattern.model.Duck;
-import com.utk.designpattern.model.FlyRocketPowered;
-import com.utk.designpattern.model.MallardDuck;
-import com.utk.designpattern.model.ModelDuck;
+import com.utk.designpattern.strategy.Duck;
+import com.utk.designpattern.strategy.FlyRocketPowered;
+import com.utk.designpattern.strategy.MallardDuck;
+import com.utk.designpattern.strategy.ModelDuck;
 
 public class DuckSimulatorV1 {
 

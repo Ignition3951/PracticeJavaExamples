@@ -1,4 +1,4 @@
-package com.utk.designpattern.model;
+package com.utk.designpattern.strategy;
 
 public interface QuackBehaviour {
 

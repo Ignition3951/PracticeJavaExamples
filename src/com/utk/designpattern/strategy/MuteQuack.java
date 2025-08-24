@@ -1,4 +1,4 @@
-package com.utk.designpattern.model;
+package com.utk.designpattern.strategy;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
