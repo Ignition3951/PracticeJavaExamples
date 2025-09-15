@@ -1,5 +1,7 @@
 package com.utk.designpattern.observer;
 
+import java.util.Observable;
+import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -8,13 +10,13 @@ public class ForecastDisplay implements Observer, DisplayElement {
     float temperature;
     float pressure;
     float humidity;
-    Subject weatherData;
+    Observable observable;
 
     private static final Logger LOGGER = Logger.getLogger(ForecastDisplay.class.getName());
 
-    public ForecastDisplay(Subject weatherData) {
-        this.weatherData = weatherData;
-        weatherData.registerObserver(this);
+    public ForecastDisplay(Observable observable) {
+        this.observable = observable;
+        observable.addObserver(this);
     }
 
     @Override
@@ -24,10 +26,14 @@ public class ForecastDisplay implements Observer, DisplayElement {
     }
 
     @Override
-    public void update(float temp, float pressure, float humidity) {
-        this.temperature = temp;
-        this.pressure = pressure;
-        this.humidity = humidity;
-        display();
+    public void update(Observable o, Object arg) {
+        this.observable = o;
+        if (o instanceof WeatherData) {
+            WeatherData weatherData = (WeatherData) o;
+            this.humidity = weatherData.getHumidity();
+            this.pressure = weatherData.getPressure();
+            this.temperature = weatherData.getTemperature();
+            display();
+        }
     }
 }

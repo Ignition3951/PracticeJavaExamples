@@ -1,40 +1,18 @@
 package com.utk.designpattern.observer;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Observable;
 
-public class WeatherData implements Subject {
+public class WeatherData extends Observable {
 
-    List<Observer> observers;
     float temperature;
     float pressure;
     float humidity;
 
     public WeatherData() {
-        observers = new ArrayList<>();
-    }
-
-    @Override
-    public void registerObserver(Observer observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void removeObserver(Observer observer) {
-        int index = observers.indexOf(observer);
-        if (index > 0) {
-            observers.remove(observer);
-        }
-    }
-
-    @Override
-    public void notifyObservers() {
-        for (Observer observer : observers) {
-            observer.update(temperature, pressure, humidity);
-        }
     }
 
     public void measurementsChanged() {
+        setChanged();
         notifyObservers();
     }
 
@@ -45,4 +23,15 @@ public class WeatherData implements Subject {
         measurementsChanged();
     }
 
+    public float getTemperature() {
+        return temperature;
+    }
+
+    public float getPressure() {
+        return pressure;
+    }
+
+    public float getHumidity() {
+        return humidity;
+    }
 }

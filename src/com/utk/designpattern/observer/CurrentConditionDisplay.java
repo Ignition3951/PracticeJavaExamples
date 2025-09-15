@@ -1,5 +1,7 @@
 package com.utk.designpattern.observer;
 
+import java.util.Observable;
+import java.util.Observer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -7,14 +9,15 @@ public class CurrentConditionDisplay implements Observer, DisplayElement {
     float temperature;
     float pressure;
     float humidity;
-    Subject weatherData;
+    Observable observable;
 
     private static final Logger LOGGER = Logger.getLogger(CurrentConditionDisplay.class.getName());
 
-    public CurrentConditionDisplay(Subject weatherData){
-        this.weatherData=weatherData;
-        weatherData.registerObserver(this);
+    public CurrentConditionDisplay(Observable observable) {
+        this.observable = observable;
+        observable.addObserver(this);
     }
+
     @Override
     public void display() {
         LOGGER.log(Level.INFO, "This is the CurrentConditionDisplay : temperature : {0} " +
@@ -22,10 +25,14 @@ public class CurrentConditionDisplay implements Observer, DisplayElement {
     }
 
     @Override
-    public void update(float temp, float pressure, float humidity) {
-        this.temperature=temp;
-        this.pressure=pressure;
-        this.humidity=humidity;
-        display();
+    public void update(Observable o, Object arg) {
+        this.observable = o;
+        if (o instanceof WeatherData) {
+            WeatherData weatherData = (WeatherData) o;
+            this.humidity = weatherData.getHumidity();
+            this.pressure = weatherData.getPressure();
+            this.temperature = weatherData.getTemperature();
+            display();
+        }
     }
 }
