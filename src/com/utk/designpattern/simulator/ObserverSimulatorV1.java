@@ -1,4 +1,4 @@
-package com.utk.designpattern;
+package com.utk.designpattern.simulator;
 
 import com.utk.designpattern.observer.CurrentConditionDisplay;
 import com.utk.designpattern.observer.ForecastDisplay;
