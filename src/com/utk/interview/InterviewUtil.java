@@ -1,6 +1,8 @@
 package com.utk.interview;
 
 import java.util.concurrent.*;
+import java.util.function.IntPredicate;
+import java.util.function.Predicate;
 
 public class InterviewUtil {
 
@@ -21,5 +23,20 @@ public class InterviewUtil {
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
+
+        Predicate<String> isNotEmpty = s -> s!=null && !s.isEmpty();
+
+        System.out.println(isNotEmpty.test("Hello"));
+        System.out.println(isNotEmpty.test(""));
+        System.out.println(isNotEmpty.test(null));
+
+        //isPositive
+        IntPredicate isPositive = n -> n>0;
+        System.out.println(isPositive.test(-5));
+        System.out.println(isPositive.test(5));
+        //isNotEmptyAndStartsWithA
+        Predicate<String> isNotEmptyAndStartsWithA = isNotEmpty.and(s-> s.startsWith("A"));
+        System.out.println(isNotEmptyAndStartsWithA.test("asdadasd"));
+        System.out.println(isNotEmptyAndStartsWithA.test("Asdadasd"));
     }
 }
