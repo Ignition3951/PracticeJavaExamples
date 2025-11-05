@@ -47,5 +47,15 @@ public class InterviewUtil {
         //upperCaseLength
         Function<String,Integer> toUpperCaseAndThenLength = toUpperCase.andThen(String::length);
         System.out.println(toUpperCaseAndThenLength.apply("hello first"));
+
+        Consumer<String> printConsumer = s -> System.out.println("Consumed value is : "+s);
+        printConsumer.accept("Hello");
+
+        Consumer<String> convertToUppercase = s -> System.out.println("The converted value is : "+s.toUpperCase());
+        convertToUppercase.accept("dummy value");
+
+        Consumer<String> convertAndPrint = printConsumer.andThen(convertToUppercase);
+        convertAndPrint.accept("print and convert");
+
     }
 }
