@@ -1,8 +1,7 @@
 package com.utk.interview;
 
 import java.util.concurrent.*;
-import java.util.function.IntPredicate;
-import java.util.function.Predicate;
+import java.util.function.*;
 
 public class InterviewUtil {
 
@@ -38,5 +37,15 @@ public class InterviewUtil {
         Predicate<String> isNotEmptyAndStartsWithA = isNotEmpty.and(s-> s.startsWith("A"));
         System.out.println(isNotEmptyAndStartsWithA.test("asdadasd"));
         System.out.println(isNotEmptyAndStartsWithA.test("Asdadasd"));
+
+        //length
+        ToIntFunction<String> stringLength = String::length;
+        System.out.println(stringLength.applyAsInt("Hello"));
+        //toUpperCase
+        UnaryOperator<String> toUpperCase = String::toUpperCase;
+        System.out.println(toUpperCase.apply("Hello"));
+        //upperCaseLength
+        Function<String,Integer> toUpperCaseAndThenLength = toUpperCase.andThen(String::length);
+        System.out.println(toUpperCaseAndThenLength.apply("hello first"));
     }
 }
