@@ -1,6 +1,7 @@
 package com.utk.interview;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.function.*;
@@ -72,7 +73,7 @@ public class InterviewUtil {
                 new Employee("Perry",70000l));
 
         List<Employee> employeesSortedBySalary = employees.stream()
-                .sorted(new EmployeeComparator())
+                .sorted(Comparator.comparingLong(Employee::getSalary).reversed())
                 .toList();
         System.out.println("The sorted employees with salary is :"+employeesSortedBySalary);
 
