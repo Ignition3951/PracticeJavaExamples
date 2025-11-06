@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.function.*;
-import java.util.stream.Collectors;
 
 public class InterviewUtil {
 
@@ -65,6 +64,17 @@ public class InterviewUtil {
                 .map(String::toUpperCase)
                 .toList();
         System.out.println(upperCaseNames);
+
+        List<Employee> employees = Arrays.asList(
+                new Employee("John",20000l),
+                new Employee("Doe",60000l),
+                new Employee("Alice",50000l),
+                new Employee("Perry",70000l));
+
+        List<Employee> employeesSortedBySalary = employees.stream()
+                .sorted(new EmployeeComparator())
+                .toList();
+        System.out.println("The sorted employees with salary is :"+employeesSortedBySalary);
 
     }
 }
