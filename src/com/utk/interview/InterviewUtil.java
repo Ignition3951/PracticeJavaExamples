@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.*;
 import java.util.function.*;
+import java.util.stream.Stream;
 
 public class InterviewUtil {
 
@@ -90,6 +91,11 @@ public class InterviewUtil {
                 salary = nthhighestSalary.get().getSalary();
         }
         System.out.println("The nth highest salary of employee is :" + salary);
+
+        String str1="This is the new world";
+        Stream<Character> charStream = str1.chars().mapToObj(i -> (char) i);
+        long count=charStream.filter(i -> i=='i').count();
+        System.out.println("The number of i in string is : "+count);
 
     }
 }
