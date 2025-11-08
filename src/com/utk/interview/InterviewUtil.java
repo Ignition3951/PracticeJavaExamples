@@ -3,10 +3,13 @@ package com.utk.interview;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.*;
 import java.util.function.*;
 
 public class InterviewUtil {
+
+    private static final String HELLO = "Hello";
 
     public static void main(String[] args) {
         MathOperation add = (a, b) -> System.out.println(a + b);
@@ -28,7 +31,7 @@ public class InterviewUtil {
 
         Predicate<String> isNotEmpty = s -> s != null && !s.isEmpty();
 
-        System.out.println(isNotEmpty.test("Hello"));
+        System.out.println(isNotEmpty.test(HELLO));
         System.out.println(isNotEmpty.test(""));
         System.out.println(isNotEmpty.test(null));
 
@@ -38,21 +41,21 @@ public class InterviewUtil {
         System.out.println(isPositive.test(5));
         //isNotEmptyAndStartsWithA
         Predicate<String> isNotEmptyAndStartsWithA = isNotEmpty.and(s -> s.startsWith("A"));
-        System.out.println(isNotEmptyAndStartsWithA.test("asdadasd"));
-        System.out.println(isNotEmptyAndStartsWithA.test("Asdadasd"));
+        System.out.println(isNotEmptyAndStartsWithA.test("after"));
+        System.out.println(isNotEmptyAndStartsWithA.test("After"));
 
         //length
         ToIntFunction<String> stringLength = String::length;
-        System.out.println(stringLength.applyAsInt("Hello"));
+        System.out.println(stringLength.applyAsInt(HELLO));
         //toUpperCase
         UnaryOperator<String> toUpperCase = String::toUpperCase;
-        System.out.println(toUpperCase.apply("Hello"));
+        System.out.println(toUpperCase.apply(HELLO));
         //upperCaseLength
         Function<String, Integer> toUpperCaseAndThenLength = toUpperCase.andThen(String::length);
         System.out.println(toUpperCaseAndThenLength.apply("hello first"));
 
         Consumer<String> printConsumer = s -> System.out.println("Consumed value is : " + s);
-        printConsumer.accept("Hello");
+        printConsumer.accept(HELLO);
 
         Consumer<String> convertToUppercase = s -> System.out.println("The converted value is : " + s.toUpperCase());
         convertToUppercase.accept("dummy value");
@@ -67,15 +70,26 @@ public class InterviewUtil {
         System.out.println(upperCaseNames);
 
         List<Employee> employees = Arrays.asList(
-                new Employee("John",20000l),
-                new Employee("Doe",60000l),
-                new Employee("Alice",50000l),
-                new Employee("Perry",70000l));
+                new Employee("John", 20000L),
+                new Employee("Doe", 60000L),
+                new Employee("Alice", 50000L),
+                new Employee("Perry", 70000L));
 
         List<Employee> employeesSortedBySalary = employees.stream()
                 .sorted(Comparator.comparingLong(Employee::getSalary).reversed())
                 .toList();
-        System.out.println("The sorted employees with salary is :"+employeesSortedBySalary);
+        System.out.println("The sorted employees with salary is :" + employeesSortedBySalary);
+
+        int nthValue = 2;
+        Optional<Employee> nthhighestSalary = employees.stream()
+                .sorted(Comparator.comparingLong(Employee::getSalary).reversed())
+                .skip(nthValue-1)
+                .findFirst();
+        Long salary=0L;
+        if (nthhighestSalary.isPresent()) {
+                salary = nthhighestSalary.get().getSalary();
+        }
+        System.out.println("The nth highest salary of employee is :" + salary);
 
     }
 }
