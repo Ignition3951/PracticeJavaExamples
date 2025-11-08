@@ -97,5 +97,10 @@ public class InterviewUtil {
         long count=charStream.filter(i -> i=='i').count();
         System.out.println("The number of i in string is : "+count);
 
+        String str2="Some randoms string is there";
+        String[] listOfWords=str2.split(" ");
+        boolean result=Arrays.stream(listOfWords).anyMatch(w -> w.equals("random"));
+        System.out.println("Is the word found : "+result);
+
     }
 }
